@@ -18,8 +18,6 @@ def save_image(img, file_dir):
     
 
 
-
-
 if __name__ == '__main__':
     parser = argparse.ArgumentParser('rectification')
     parser.add_argument('--input_dir', type=str)
@@ -27,10 +25,6 @@ if __name__ == '__main__':
     parser.add_argument('--debug', type=bool, default=False)
     
     args = parser.parse_args()
-    print(args.input_dir)
-    print(args.output_dir)
-    print(args.debug)
-    
     
     img = load_image(args.input_dir)
     preprocessed = rectangle_detact.reinforce_contours(img)
@@ -53,9 +47,7 @@ if __name__ == '__main__':
 
     save_image(rectified_img, file_dir=args.output_dir + '/result.jpg')
 
-    
-
-    if args.debug:    
+    if args.debug:
 
         if not os.path.exists(args.output_dir + '/debug'):
             os.makedirs(args.output_dir + '/debug')
@@ -72,15 +64,10 @@ if __name__ == '__main__':
         save_image(contours_img, 
                    file_dir=args.output_dir + '/debug'  + '/contours.jpg')
         
-    
         selected_contour_img = img.copy()
-        
         
         cv2.polylines(selected_contour_img, [biggest_cand['approx']], True, (0, 255, 0), thickness=3)
         
         save_image(selected_contour_img, 
                    file_dir=args.output_dir + '/debug'  + '/selected_contour.jpg')
         
-        
-        
-    
